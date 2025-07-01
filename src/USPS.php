@@ -75,6 +75,7 @@ class USPS
         // If not, look up the class and instantiate it
         $classMap = [
             'addresses' => Services\Addresses::class,
+            'locations' => Services\Locations::class,
         ];
 
         $serviceClass = $classMap[$name] ?? null;
@@ -155,7 +156,27 @@ class USPS
             $statusCode = $response ? $response->getStatusCode() : 0;
             $body       = $response ? $response->getBody()->getContents() : '';
             $errorData  = json_decode($body) ?: new \stdClass;
-            $message    = $errorData->error->message ?? $errorData->message ?? 'Request failed';
+
+            // Build detailed error message from USPS error structure
+            $message = $errorData->error->message ?? $errorData->message ?? 'Request failed';
+
+            // If we have detailed errors array, append them
+            if (isset($errorData->error->errors) && is_array($errorData->error->errors)) {
+                $errorDetails = [];
+                foreach ($errorData->error->errors as $error) {
+                    $detail = sprintf(
+                        '%s: %s (Code: %s)',
+                        $error->title  ?? 'Error',
+                        $error->detail ?? 'No details',
+                        $error->code   ?? 'Unknown'
+                    );
+                    if (isset($error->source->parameter)) {
+                        $detail .= " [Parameter: {$error->source->parameter}]";
+                    }
+                    $errorDetails[] = $detail;
+                }
+                $message .= "\n" . implode("\n", $errorDetails);
+            }
 
             switch ($statusCode) {
                 case 400:

@@ -3,6 +3,7 @@
 namespace ColeThorsen\USPS\Tests\Services;
 
 use ColeThorsen\USPS\Enums\MailClass;
+use ColeThorsen\USPS\Enums\ProcessingCategory;
 use ColeThorsen\USPS\Tests\TestCase;
 
 class LocationsTest extends TestCase
@@ -15,7 +16,7 @@ class LocationsTest extends TestCase
         $params = [
             'mailClass'          => MailClass::PARCEL_SELECT->value,
             'destinationZIPCode' => $this->getSecondaryTestAddress()['ZIPCode'],
-            'processingCategory' => 'MACHINABLE',
+            'processingCategory' => ProcessingCategory::MACHINABLE->value,
             'mailingDate'        => date('Y-m-d', strtotime('+1 day')),
         ];
 
@@ -79,10 +80,10 @@ class LocationsTest extends TestCase
     public function test_find_parcel_locker_locations(): void
     {
         $params = [
-            'city' => $this->getSecondaryTestAddress()['city'],
-            'state' => $this->getSecondaryTestAddress()['state'],
-            'offset'  => 0,     // Required parameter
-            'limit'   => 10,    // Required parameter
+            'city'   => $this->getSecondaryTestAddress()['city'],
+            'state'  => $this->getSecondaryTestAddress()['state'],
+            'offset' => 0,     // Required parameter
+            'limit'  => 10,    // Required parameter
         ];
 
         $response = $this->usps->locations->parcelLockerLocations($params);
@@ -98,11 +99,11 @@ class LocationsTest extends TestCase
     {
         $destAddress = $this->getSecondaryTestAddressWithPlus4();
         $params      = [
-            'mailClass'          => MailClass::MEDIA_MAIL->value,
-            'destinationZIPCode' => substr($destAddress['ZIPCode'], 0, 5), // Just the 5-digit ZIP
+            'mailClass'           => MailClass::MEDIA_MAIL->value,
+            'destinationZIPCode'  => substr($destAddress['ZIPCode'], 0, 5), // Just the 5-digit ZIP
             'destinationZIPPlus4' => substr($destAddress['ZIPCode'], -4),  // Just the 4-digit extension
-            'processingCategory' => 'NONSTANDARD',
-            'mailingDate'        => date('Y-m-d', strtotime('+2 days')),
+            'processingCategory'  => ProcessingCategory::NONSTANDARD->value,
+            'mailingDate'         => date('Y-m-d', strtotime('+2 days')),
         ];
 
         $response = $this->usps->locations->dropoffLocations($params);
