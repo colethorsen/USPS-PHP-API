@@ -665,7 +665,6 @@ components:
              * '931' - Insurance > $500
              * '955' - Return Receipt (Unsupported as of 01/19/2025)
           items:
-            pattern: "\\d{3}"
             type: integer
             enum:
             - 813
@@ -677,7 +676,6 @@ components:
             - 955
         extraService:
           title: Extra Service Codes
-          pattern: "\\d{3}"
           type: integer
           description: |-
             Extra Service Code requested
@@ -889,7 +887,6 @@ components:
             type: array
             description: A list of Extra Services to be included in the total rates search. If no extra services are specified all applicable extra services for the mail class will be returned.
             items:
-              pattern: "\\d{3}"
               maxItems: 10
               type: integer
               description: |-
@@ -1335,7 +1332,6 @@ components:
           $ref: '#/components/schemas/internationalPriceType'
         extraService:
           title: Extra Service Codes
-          pattern: "\\d{3}"
           type: integer
           description: "Extra Service Code requested \n * '813' - Hazardous Materials - Class 7 – Radioactive Materials\n * '820' - Hazardous Materials - Class 9 – Unmarked Lithium Batteries\n * '826' - Hazardous Materials - Division 6.2 Biological Materials\n * '857' - Hazardous Materials\n * '930' - Insurance <= $500\n * '931' - Insurance > $500\n * '955' - Return Receipt (Unsupported as of 01/19/2025) "
           example: 930

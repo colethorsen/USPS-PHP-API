@@ -973,7 +973,6 @@ components:
       additionalProperties: false
       description: Search parameters for an extra service price.
     ExtraService:
-      pattern: "\\d{3}"
       type: integer
       description: |
         Extra Service Code requested.
