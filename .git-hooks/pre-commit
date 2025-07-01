@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Get staged PHP files
+STAGED_PHP=$(git diff --cached --name-only --diff-filter=ACM -- '*.php')
+
+# Existing PHP checks
+if [ -z "$STAGED_PHP" ]; then
+    echo "INFO: No PHP files staged. Skipping Pint and PHPUnit Tests"
+
+else
+    # Run Pint on staged files
+    ./vendor/bin/pint $STAGED_PHP
+
+    # Check if any files were modified by Pint
+    MODIFIED_FILES=$(git diff --name-only -- $STAGED_PHP)
+
+    if [ -n "$MODIFIED_FILES" ]; then
+        echo "Pint made changes:"
+        echo "$MODIFIED_FILES"
+        #git add $MODIFIED_FILES
+        #echo "Changes have been staged. Please review before committing."
+        exit 1  # Abort the commit to allow review
+    else
+        echo "SUCCESS: Pint completed. No changes were necessary."
+    fi
+
+    ./vendor/bin/phpunit
+
+    # Check if tests passed
+    if [ $? -ne 0 ]; then
+        echo "ERROR: PHPUnit tests failed. Aborting commit."
+        exit 1
+    fi
+fi
+
+echo "SUCCESS: All checks passed. Proceeding with commit."
+exit 0;
