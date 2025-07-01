@@ -74,8 +74,10 @@ class USPS
 
         // If not, look up the class and instantiate it
         $classMap = [
-            'addresses' => Services\Addresses::class,
-            'locations' => Services\Locations::class,
+            'addresses'           => Services\Addresses::class,
+            'domesticPrices'      => Services\DomesticPrices::class,
+            'internationalPrices' => Services\InternationalPrices::class,
+            'locations'           => Services\Locations::class,
         ];
 
         $serviceClass = $classMap[$name] ?? null;
@@ -107,12 +109,7 @@ class USPS
             return function (RequestInterface $request, array $options) use ($handler) {
                 // If validator is provided in options, use it
                 if (isset($options['validator']) && $options['validator'] instanceof Validator) {
-                    try {
-                        $options['validator']->validateRequest($request);
-                    } catch (ValidationFailed $e) {
-                        // Throw our exception immediately to avoid issues with the middleware stack
-                        throw new ValidationException('Request validation failed: ' . $e->getMessage(), 400);
-                    }
+                    $options['validator']->validateRequest($request);
                 }
 
                 // Continue with the request

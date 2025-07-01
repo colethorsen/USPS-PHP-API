@@ -1,0 +1,73 @@
+<?php
+
+namespace ColeThorsen\USPS\Enums;
+
+enum ExtraService: int
+{
+    case USPS_LABEL_DELIVERY_SERVICE                = 415;
+    case TRACKING_PLUS_6_MONTHS                     = 480;
+    case TRACKING_PLUS_1_YEAR                       = 481;
+    case TRACKING_PLUS_3_YEARS                      = 482;
+    case TRACKING_PLUS_5_YEARS                      = 483;
+    case TRACKING_PLUS_7_YEARS                      = 484;
+    case TRACKING_PLUS_10_YEARS                     = 485;
+    case TRACKING_PLUS_SIGNATURE_3_YEARS            = 486;
+    case TRACKING_PLUS_SIGNATURE_5_YEARS            = 487;
+    case TRACKING_PLUS_SIGNATURE_7_YEARS            = 488;
+    case TRACKING_PLUS_SIGNATURE_10_YEARS           = 489;
+    case PO_BOX_LOCKER_STOCKING_FEE                 = 498;
+    case PO_BOX_LOCKER_SELF_SERVICE_PICKUP_FEE      = 500;
+    case PO_BOX_LOCKER_CLERK_ASSISTED_PICKUP_FEE    = 501;
+    case PO_BOX_LOCKER_LOCAL_DELIVERY_FEE           = 502;
+    case HAZMAT_AIR_ELIGIBLE_ETHANOL                = 810;
+    case HAZMAT_CLASS_1_TOY_PROPELLANT              = 811;
+    case HAZMAT_CLASS_3_FLAMMABLE_LIQUIDS           = 812;
+    case HAZMAT_CLASS_7_RADIOACTIVE_MATERIALS       = 813;
+    case HAZMAT_CLASS_8_AIR_ELIGIBLE_CORROSIVE      = 814;
+    case HAZMAT_CLASS_8_NONSPILLABLE_WET_BATTERIES  = 815;
+    case HAZMAT_CLASS_9_LITHIUM_BATTERY_GROUND_ONLY = 816;
+    case HAZMAT_CLASS_9_LITHIUM_BATTERY_RETURNS     = 817;
+    case HAZMAT_CLASS_9_MARKED_LITHIUM_BATTERIES    = 818;
+    case HAZMAT_CLASS_9_DRY_ICE                     = 819;
+    case HAZMAT_CLASS_9_UNMARKED_LITHIUM_BATTERIES  = 820;
+    case HAZMAT_CLASS_9_MAGNETIZED_MATERIALS        = 821;
+    case HAZMAT_DIV_4_1_FLAMMABLE_SOLIDS            = 822;
+    case HAZMAT_DIV_5_1_OXIDIZERS                   = 823;
+    case HAZMAT_DIV_5_2_ORGANIC_PEROXIDES           = 824;
+    case HAZMAT_DIV_6_1_TOXIC_MATERIALS             = 825;
+    case HAZMAT_DIV_6_2_BIOLOGICAL_MATERIALS        = 826;
+    case HAZMAT_EXCEPTED_QUANTITY_PROVISION         = 827;
+    case HAZMAT_GROUND_ONLY                         = 828;
+    case HAZMAT_AIR_ELIGIBLE_ID8000                 = 829;
+    case HAZMAT_LIGHTERS                            = 830;
+    case HAZMAT_LIMITED_QUANTITY_GROUND             = 831;
+    case HAZMAT_SMALL_QUANTITY_PROVISION            = 832;
+    case SPECIAL_HANDLING_PERISHABLE                = 853;
+    case LIVE_ANIMAL_TRANSPORTATION_FEE             = 856;
+    case HAZARDOUS_MATERIALS                        = 857;
+    case CREMATED_REMAINS                           = 858;
+    case CERTIFIED_MAIL                             = 910;
+    case CERTIFIED_MAIL_RESTRICTED_DELIVERY         = 911;
+    case CERTIFIED_MAIL_ADULT_SIGNATURE             = 912;
+    case CERTIFIED_MAIL_ADULT_SIGNATURE_RESTRICTED  = 913;
+    case COLLECT_ON_DELIVERY                        = 915;
+    case COLLECT_ON_DELIVERY_RESTRICTED             = 917;
+    case USPS_TRACKING_ELECTRONIC                   = 920;
+    case SIGNATURE_CONFIRMATION                     = 921;
+    case ADULT_SIGNATURE_REQUIRED                   = 922;
+    case ADULT_SIGNATURE_RESTRICTED_DELIVERY        = 923;
+    case SIGNATURE_CONFIRMATION_RESTRICTED          = 924;
+    case PRIORITY_EXPRESS_MERCHANDISE_INSURANCE     = 925;
+    case INSURANCE_UP_TO_500                        = 930;
+    case INSURANCE_OVER_500                         = 931;
+    case INSURANCE_RESTRICTED_DELIVERY              = 934;
+    case REGISTERED_MAIL                            = 940;
+    case REGISTERED_MAIL_RESTRICTED_DELIVERY        = 941;
+    case RETURN_RECEIPT                             = 955;
+    case RETURN_RECEIPT_ELECTRONIC                  = 957;
+    case LIVE_ANIMAL_PERISHABLE_HANDLING_FEE        = 972;
+    case SIGNATURE_REQUESTED                        = 981;
+    case PARCEL_LOCKER_DELIVERY                     = 984;
+    case PO_TO_ADDRESSEE                            = 986;
+    case SUNDAY_DELIVERY                            = 991;
+}
